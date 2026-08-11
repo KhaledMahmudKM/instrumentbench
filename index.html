@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instrument Lab — Compose Your Own Instrument</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="unit"><div class="inner">
+
+  <div class="panel-header">
+    <div class="brand">
+      <h1>INSTRUMENT LAB</h1>
+      <span class="model">MODEL I &mdash; TONE COMPOSER &middot; companion to Note Bench</span>
+    </div>
+    <div class="status-lamp"><span class="lamp" id="lamp"></span><span id="lampText">STANDBY</span></div>
+  </div>
+
+  <div class="workspace">
+
+    <!-- ===== Library ===== -->
+    <div class="panel library-panel">
+      <div class="scope-label"><span>LIBRARY</span><span class="tag" id="folderStatus">browser storage only</span></div>
+
+      <div class="library-actions">
+        <button class="mini-btn" id="newInstrumentBtn" type="button">+ New</button>
+        <button class="mini-btn" id="importBtn" type="button">Import JSON</button>
+        <input type="file" id="importInput" accept="application/json,.json" multiple hidden>
+        <button class="mini-btn" id="connectFolderBtn" type="button">Connect Folder</button>
+        <button class="mini-btn" id="reconnectFolderBtn" type="button" hidden>Reconnect Folder</button>
+      </div>
+
+      <div id="libraryList" class="library-list"></div>
+    </div>
+
+    <!-- ===== Composer ===== -->
+    <div class="panel composer-panel">
+      <div class="scope-label"><span>COMPOSITION</span><span class="tag" id="instrumentKindTag">standard</span></div>
+
+      <div class="composer-name-row">
+        <label class="param-field name-field">
+          <span class="param-label">INSTRUMENT NAME</span>
+          <input type="text" id="instrumentName" value="Piano">
+        </label>
+        <div class="composer-actions">
+          <button class="mini-btn" id="resetBtn" type="button">Reset</button>
+          <button class="mini-btn" id="exportBtn" type="button">Export JSON</button>
+          <button class="mini-btn danger" id="deleteBtn" type="button" hidden>Delete</button>
+          <button class="play-btn" id="saveBtn" type="button"><span class="dot"></span><span>SAVE</span></button>
+        </div>
+      </div>
+
+      <div class="composer-columns">
+        <div class="composer-col">
+          <div class="param-group-title">FREQUENCY COMPONENTS</div>
+          <div id="harmonicsContainer"></div>
+        </div>
+        <div class="composer-col">
+          <div id="paramsContainer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="keyboard-wrap">
+    <div class="scope-label">
+      <span>KEYBOARD</span>
+      <span class="tag">C3&ndash;B5 &middot; click a key to hear the current composition</span>
+    </div>
+    <div id="keyboardContainer" class="keyboard-container"></div>
+    <div class="keyboard-footer-row">
+      <div class="field">
+        <label for="noteLength">TEST NOTE LENGTH</label>
+        <div class="duration-row">
+          <input type="range" id="noteLength" min="0.2" max="3" step="0.1" value="1.2">
+          <span class="duration-readout" id="noteLengthReadout">1.2 s</span>
+        </div>
+      </div>
+      <div class="readout">
+        <div><b id="rNote">&mdash;</b> &middot; <span id="rFreq">&mdash;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <b>Instrument Lab.</b> Select a standard instrument to see its full composition &mdash; every partial's
+    frequency ratio and amplitude, plus envelope, inharmonicity, vibrato, and breath &mdash; and edit any value.
+    Click the keyboard to hear your changes instantly. <b>Save</b> keeps your version as a new custom
+    instrument (browser storage always; also written to a connected folder if you've set one up). Custom
+    instruments reappear automatically next time you open this page. Note: real folder sync uses the File
+    System Access API, supported in Chromium browsers (Chrome, Edge) but not Firefox or Safari &mdash; use
+    Export/Import there instead.
+  </footer>
+
+</div></div>
+
+<!-- Load order matters: theory -> audio engine -> keyboard -> store -> composer -> ui -->
+<script src="js/music-theory.js"></script>
+<script src="js/audio-engine.js"></script>
+<script src="js/keyboard.js"></script>
+<script src="js/instrument-store.js"></script>
+<script src="js/composer-ui.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

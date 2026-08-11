@@ -1,0 +1,36 @@
+{
+  "id": "flute-km",
+  "label": "Flute-km",
+  "builtin": false,
+  "harmonics": [
+    {
+      "ratio": 1,
+      "amp": 1
+    },
+    {
+      "ratio": 2,
+      "amp": 0.14
+    },
+    {
+      "ratio": 4,
+      "amp": 0.04
+    },
+    {
+      "ratio": 5,
+      "amp": 0.02
+    },
+    {
+      "ratio": 7,
+      "amp": 0.28
+    }
+  ],
+  "envelope": {
+    "attack": 0.09,
+    "decay": 0.06,
+    "sustain": 0.9,
+    "release": 0.16
+  },
+  "inharmonicity": 0,
+  "vibrato": null,
+  "breath": 0.028
+}
